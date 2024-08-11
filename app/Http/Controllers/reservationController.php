@@ -14,47 +14,16 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class reservationController extends Controller
 {
 
-
-/*
-    public function priceTer()
-    {
-
-        $Tarif=0;
-        if (Request::$request->input('gareD') != Request::$request->input('gareA')) {
-            $A = Gar::All()->WHERE('id', Request::$request->input('gareD'));
-            $B = Gar::All()->WHERE('id', Request::$request->input('gareA'));
-            foreach ($A as $A1) foreach ($B as $B1) {
-                if ($A1['Categorie'] == "zone 1" and $B1['Categorie'] == "zone 1") {
-                    $Tarif = (500 * Request::$request->input('billet'));
-                } elseif (($A1['Categorie'] == "zone 2" and $B1['Categorie'] == "zone 2")) {
-                    $Tarif = (1000 * Request::$request->input('billet'));
-                } else {
-                    $Tarif = (1500 * Request::$request->input('billet'));
-                }
-            }
-            return $Tarif;
-        }
-        else {
-            return back();
-        }
-    }
-    public function prix()
-    {
-        return $this->priceTer();
-    }
-*/
-
-
     public function generateQRCode()
     {
        // $tarif=$this->prix();
         // Contenu que vous souhaitez encoder dans le code QR
         $donne = DB::table('reservations')->first();
             if ($donne) {
-                $Tarif = $donne->tarif;
+                //$Tarif = $donne->tarif;
                 // Utiliser les champs de la table dans le contenu du code QR
                 $content = 'Votre Ticket de ' . $donne->gareD . ' a ' . $donne->gareA .
-                    ' Du ' . $donne->dateReservation . ' Classe ' . $donne->classeP.' votre prix est: '.$Tarif.
+                    ' Du ' . $donne->dateReservation . ' Classe ' . $donne->classeP.
                     // Récupérer la date de génération depuis la base de données
                     $dateReservation = Carbon::parse($donne->dateReservation);
                 // Vérifier si le code QR est toujours valide (3 jours de validité)
